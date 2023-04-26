@@ -23,7 +23,8 @@ def crawl(url):
                     global counter
                     counter += 1
                 elif "/s/tehran/buy-apartment" in href:
-                    f.write(href + "\n")
+                    district = href.rsplit('/', 1)[-1]
+                    f.write(district + "\n")
                     print(COLORFUL, 'link:', href, RESET)
                     global numberOfNeighborhood
                     numberOfNeighborhood += 1
