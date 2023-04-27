@@ -6,6 +6,7 @@ import houseCrawler
 RED = '\033[91m'
 RESET = '\033[0m'
 COLORFUL = '\033[93m'
+MAIN_URL = 'https://divar.ir/s/tehran/buy-apartment/'
 
 
 def base_crawl(url):
@@ -21,4 +22,22 @@ def base_crawl(url):
                 print(href)
 
 
-base_crawl('https://divar.ir/s/tehran/buy-apartment/tehran-now')
+# todo: change this function and make region enum or dictionary instead of reading from file
+def validate_region(region):
+    with open('district.txt', 'r') as file:
+        contents = file.read().split("\n")
+        return region in contents
+
+
+def get_region():
+    while True:
+        region = input("please enter region:")
+        if validate_region(region):
+            return region
+        print('the region is incorrect')
+
+
+region = get_region()
+url = MAIN_URL + region
+
+base_crawl(url)
