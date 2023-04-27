@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import saveInfoToDatabase
 
 persian_to_english_table = str.maketrans('۰۱۲۳۴۵۶۷۸۹', '0123456789')
 
@@ -26,7 +27,7 @@ def calculate_main_info(base_info):
 
 
 def save_all(info):
-    print(info)
+    saveInfoToDatabase.save_house_info(info)
 
 def crawl(url, short_link):
     response = requests.get(url)
