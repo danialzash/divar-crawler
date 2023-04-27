@@ -6,6 +6,7 @@ import houseCrawler
 RED = '\033[91m'
 RESET = '\033[0m'
 COLORFUL = '\033[93m'
+ANOTHER_COLOR = '\033[96m'
 MAIN_URL = 'https://divar.ir/s/tehran/buy-apartment/'
 
 
@@ -17,9 +18,10 @@ def base_crawl(url):
         href = link.get('href')
         if href:
             if "/v/" in href:
-                # new_link = 'https://divar.ir' + quote(href)
-                # houseCrawler.crawl(new_link)
-                print(href)
+                new_href = href[3:-9]
+                new_link = 'https://divar.ir/v/' + quote(new_href) + '/' + href[-8:]
+                print(new_link.strip())
+                houseCrawler.crawl(new_link, href[-8:])
 
 
 # todo: change this function and make region enum or dictionary instead of reading from file

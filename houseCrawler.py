@@ -17,7 +17,7 @@ def calculate_main_details(spans):
 def calculate_main_info(base_info):
     total_price = base_info[0].text.split()[0].translate(persian_to_english_table)
     price = base_info[1].text.split()[0].translate(persian_to_english_table)
-    if len(base_info[2].text.split()) > 1:
+    if len(base_info[2].text.split()) == 3:
         words = base_info[2].text.split()
         floor = words[0].translate(persian_to_english_table) + " from " + words[2].translate(persian_to_english_table)
     else:
@@ -28,7 +28,7 @@ def calculate_main_info(base_info):
 def save_all(info):
     print(info)
 
-def crawl(url):
+def crawl(url, short_link):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     title = soup.title.string
@@ -60,6 +60,7 @@ def crawl(url):
         "totalPrice": total_price,
         "price": price,
         "floor": floor,
+        "shortLink": short_link,
         "details": details
     }
 
@@ -73,8 +74,6 @@ def calculate_date(dateDiv):
         dateDivString = dateDiv.text.strip()
         words = dateDivString.split()
         exactDate = ' '.join(words[:3])
-        # print(words[:3])
-        print(exactDate)
         return exactDate
 
 
