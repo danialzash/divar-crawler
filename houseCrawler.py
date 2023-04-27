@@ -33,8 +33,8 @@ def crawl(url):
     soup = BeautifulSoup(response.content, 'html.parser')
     title = soup.title.string
 
-    dateDiv = soup.find('div', {'class': 'kt-page-title__subtitle kt-page-title__subtitle--responsive-sized'})
-    exactDate = calculate_date(dateDiv)
+    date_div = soup.find('div', {'class': 'kt-page-title__subtitle kt-page-title__subtitle--responsive-sized'})
+    exactDate = calculate_date(date_div)
 
     spans = soup.find_all(
         'span',
@@ -65,13 +65,16 @@ def crawl(url):
 
     save_all(info)
 
+
 def calculate_date(dateDiv):
-    dateDivString = dateDiv.text.strip()
-    words = dateDivString.split()
-    exactDate = ' '.join(words[:3])
-    # print(words[:3])
-    print(exactDate)
-    return exactDate
+    if dateDiv == None:
+        return "ok"
+    else:
+        dateDivString = dateDiv.text.strip()
+        words = dateDivString.split()
+        exactDate = ' '.join(words[:3])
+        # print(words[:3])
+        print(exactDate)
+        return exactDate
 
 
-crawl('https://divar.ir/v/۸۴-متر-دوخوابه-تهران-نو_آپارتمان_تهران_تهران-نو_دیوار/AZHtvASa')
