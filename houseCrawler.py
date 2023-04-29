@@ -24,8 +24,10 @@ def calculate_year(text):
 
 
 def calculate_main_info(base_info):
-    total_price = base_info[0].text.split()[0].translate(persian_to_english_table)
-    price = base_info[1].text.split()[0].translate(persian_to_english_table)
+    total_price = base_info[0].text.split()[0].translate(persian_to_english_table).replace("٬", "")
+    total_price = int(total_price)
+    price = base_info[1].text.split()[0].translate(persian_to_english_table).replace("٬", "")
+    price = int(price)
     if len(base_info[-1].text.split()) == 3:
         words = base_info[-1].text.split()
         floor = words[0].translate(persian_to_english_table) + " from " + words[2].translate(persian_to_english_table)

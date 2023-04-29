@@ -43,6 +43,10 @@ def validate_region(input_region):
         return input_region in contents
 
 
+def print_blue(printable):
+    print(ANOTHER_COLOR, printable, RESET)
+
+
 def get_region():
     while True:
         input_region = input("please enter region:")
@@ -57,12 +61,11 @@ url = MAIN_URL + region
 while True:
     if is_last_page:
         break
+    print_blue(pager_number)
     if pager_number == 0:
-        print(ANOTHER_COLOR, pager_number, RESET)
         base_crawl(url)
     else:
-        print(ANOTHER_COLOR, pager_number, RESET)
         base_crawl(url + "?page=" + str(pager_number))
     pager_number += 1
 
-# base_crawl(url)
+
