@@ -7,12 +7,20 @@ persian_to_english_table = str.maketrans('۰۱۲۳۴۵۶۷۸۹', '0123456789')
 
 def calculate_main_details(spans):
     area = spans[0].text.strip().translate(persian_to_english_table)
-    year = spans[1].text.strip().translate(persian_to_english_table)
+    year = calculate_year(spans[1].text.strip())
     number_of_rooms = spans[2].text.strip().translate(persian_to_english_table)
     elevator = False if spans[3].text.strip() == "آسانسور ندارد" else True
     parking = False if spans[4].text.strip() == "پارکینگ ندارد" else True
     cellar = False if spans[5].text.strip() == "انباری ندارد" else True
     return area, year, number_of_rooms, elevator, parking, cellar
+
+
+# return exact year or -1370 if the build year is less than 1370
+def calculate_year(text):
+    if len(text) == 4:
+        return text.translate(persian_to_english_table)
+    else:
+        return -1370
 
 
 def calculate_main_info(base_info):
