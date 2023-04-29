@@ -29,6 +29,7 @@ def calculate_main_info(base_info):
 def save_all(info):
     saveInfoToDatabase.save_house_info(info)
 
+
 def crawl(url, short_link):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
